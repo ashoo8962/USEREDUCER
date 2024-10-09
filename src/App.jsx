@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useReducer } from 'react'
+
 import './App.css'
 
+const initialState=0
+//define kiya
+const reducer = (state, action) => {
+  console.log(state,action)
+
+  if(action.type==='incremment')
+
+    return state+1;
+    if(action.type==='decremment')
+    return state-1;
+
+    return state
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
+
+ const[state,dispatch] =  useReducer(reducer, initialState)
+ 
+
+
 
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+<p>{state}</p>
+        <button onClick={() => dispatch({type:'incremment'})}>
+          Increment
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
+        <button onClick={() => dispatch({type:'decremment'})}>
+          Decrement  
+        </button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
-}
 
+}
 export default App
